@@ -26,7 +26,7 @@ API REST con autenticación JWT desarrollada con Node.js, Fastify, Prisma y Post
 
 1. **Clonar el repositorio**
 ```bash
-git clone <url-del-repo>
+git clone [<url-del-repo>](https://github.com/JoaquinGiorgis/challenge-belo)
 cd challenge-belo
 ```
 
