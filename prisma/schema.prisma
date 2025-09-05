@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  nombre    String
+  password  String
+  saldo     Decimal  @default(0.00) @db.Decimal(15, 2)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relaciones para transacciones
+  transaccionesOrigen  Transaction[] @relation("TransaccionOrigen")
+  transaccionesDestino Transaction[] @relation("TransaccionDestino")
+
+  @@map("users")
+}
+
+model Transaction {
+  id       String            @id @default(cuid())
+  origenId String
+  destinoId String
+  monto    Decimal           @db.Decimal(15, 2)
+  estado   TransactionStatus @default(PENDIENTE)
+  fecha    DateTime          @default(now())
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  // Relaciones
+  origen   User @relation("TransaccionOrigen", fields: [origenId], references: [id])
+  destino  User @relation("TransaccionDestino", fields: [destinoId], references: [id])
+
+  // Índices para optimizar consultas
+  @@index([origenId])
+  @@index([destinoId])
+  @@index([estado])
+  @@index([fecha])
+  @@map("transactions")
+}
+
+enum TransactionStatus {
+  PENDIENTE
+  CONFIRMADA
+  RECHAZADA
+}
