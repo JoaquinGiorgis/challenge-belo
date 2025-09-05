@@ -1,7 +1,5 @@
 # Challenge Belo API
 
-API REST con autenticación JWT desarrollada con Node.js, Fastify, Prisma y PostgreSQL.
-
 ## 🚀 Características
 
 - ✅ Autenticación segura con JWT
@@ -104,7 +102,7 @@ src/
 ├── schemas/         # Esquemas de validación con Zod
 ├── services/        # Lógica de negocio
 ├── test/           # Tests unitarios
-└── server.js       # Punto de entrada de la aplicación
+└── server.ts      # Punto de entrada de la aplicación
 ```
 
 ## 🔐 Endpoints Principales
