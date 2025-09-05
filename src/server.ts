@@ -194,7 +194,6 @@ async function start(): Promise<void> {
     })
 
     console.log(`🚀 Servidor corriendo en http://localhost:${env.PORT}`)
-    console.log(`📚 Documentación disponible en http://localhost:${env.PORT}/docs`)
   } catch (error) {
     fastify.log.error(error)
     process.exit(1)
@@ -203,14 +202,11 @@ async function start(): Promise<void> {
 
 // Manejo de cierre graceful
 const gracefulShutdown = async (signal: string): Promise<void> => {
-  console.log(`\n🛑 Recibida señal ${signal}, cerrando servidor...`)
   
   try {
     await fastify.close()
-    console.log('✅ Servidor cerrado correctamente')
     process.exit(0)
   } catch (error) {
-    console.error('❌ Error al cerrar servidor:', error)
     process.exit(1)
   }
 }

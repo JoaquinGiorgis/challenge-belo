@@ -31,18 +31,14 @@ jest.mock('@prisma/client', () => ({
 
 
 beforeAll(async () => {
-  console.log('✅ Tests configurados con mocks')
 })
 
 beforeEach(async () => {
   // Limpiar mocks antes de cada test
   jest.clearAllMocks()
-  
-  console.log('🧹 Mocks limpiados')
 })
 
 afterAll(async () => {
-  console.log('✅ Tests finalizados')
 })
 
 // Exportar prisma mock para usar en los tests
